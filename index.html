@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#F7F3EA" />
+<title>一炁入梦 · 一人之下官方疗愈音乐企划</title>
+<style>
+:root{
+  --ink:#F7F3EA;
+  --ink2:#FFFFFF;
+  --qi:#0F7A6B;
+  --qi2:#3E9C8E;
+  --gold:#9C6F27;
+  --seal:#B03A2C;
+  --paper:#FFFDF7;
+  --text:#242B33;
+  --muted:#6E6A5F;
+  --line:rgba(15,122,107,.18);
+  --card:rgba(255,255,255,.72);
+  --serif:"Songti SC","STSong","Source Han Serif SC","Noto Serif SC","SimSun",serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  background:linear-gradient(175deg,#F9F5ED 0%,#F3EEE3 42%,#EDE7DA 100%);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block;}
+button{font-family:inherit;color:inherit;border:0;background:none;cursor:pointer;}
+
+/* ---------- 背景 ---------- */
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.6;}
+.glow{position:fixed;border-radius:50%;filter:blur(70px);opacity:.34;z-index:0;pointer-events:none;}
+.g1{width:320px;height:320px;left:-90px;top:60px;background:radial-gradient(circle,#A9CFC6,transparent 70%);animation:float1 14s ease-in-out infinite;}
+.g2{width:280px;height:280px;right:-80px;top:420px;background:radial-gradient(circle,#E4D2A8,transparent 70%);animation:float2 18s ease-in-out infinite;}
+.g3{width:300px;height:300px;left:-60px;bottom:220px;background:radial-gradient(circle,#BCD3E0,transparent 70%);animation:float1 22s ease-in-out infinite reverse;}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.12)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-35px,30px) scale(1.08)}}
+
+/* ---------- 容器 ---------- */
+.app{position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 18px 60px;}
+
+/* ---------- Hero ---------- */
+.hero{padding:44px 0 10px;text-align:center;position:relative;}
+.brandline{font-size:11px;letter-spacing:.32em;color:var(--gold);opacity:.85;margin-bottom:18px;}
+.brandline span{opacity:.6;}
+.hero .album-tag{
+  display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.16em;
+  color:var(--qi);border:1px solid rgba(15,122,107,.32);border-radius:999px;
+  padding:5px 14px;margin-bottom:20px;background:rgba(15,122,107,.07);
+}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--qi);box-shadow:0 0 8px var(--qi);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.25)}}
+.bigtitle{
+  font-family:var(--serif);font-size:46px;line-height:1.2;font-weight:600;
+  letter-spacing:.22em;margin:0 0 6px;text-indent:.22em;
+  background:linear-gradient(180deg,#1B242C 0%,#28443F 55%,#0F7A6B 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.55));
+}
+.hero-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 16px;}
+.hero-rule i{display:block;height:1px;width:52px;background:linear-gradient(90deg,transparent,rgba(156,111,39,.5));}
+.hero-rule i:last-child{background:linear-gradient(270deg,transparent,rgba(156,111,39,.5));}
+.hero-rule b{font-family:var(--serif);font-weight:400;font-size:12px;letter-spacing:.3em;color:var(--gold);}
+.hero-desc{font-family:var(--serif);font-size:15px;color:#454E59;line-height:2;margin:0 6px 4px;}
+.hero-desc em{font-style:normal;color:var(--qi);}
+.hero-ask{font-family:var(--serif);font-size:16px;color:var(--gold);margin-top:12px;letter-spacing:.08em;}
+.people{margin:22px 0 0;font-size:12px;color:var(--muted);letter-spacing:.1em;}
+.people b{color:var(--qi);font-weight:600;}
+
+/* ---------- IP 元素：八卦盘 ---------- */
+.bagua{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:300px;height:300px;pointer-events:none;opacity:.1;z-index:0;}
+.bagua svg{width:100%;height:100%;animation:spin 68s linear infinite;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.ipmark{
+  display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.18em;
+  color:var(--gold);opacity:.72;margin-top:10px;
+  border-top:1px solid rgba(156,111,39,.3);border-bottom:1px solid rgba(156,111,39,.3);padding:6px 12px;
+}
+
+/* ---------- IP 元素：曲目场景批注 ---------- */
+.tscene{
+  display:inline-block;margin-top:5px;font-size:10.5px;letter-spacing:.06em;
+  color:var(--gold);opacity:.9;border-left:2px solid rgba(156,111,39,.5);padding-left:7px;
+}
+
+/* ---------- 自动入境提示条 ---------- */
+.autoplay-bar{
+  margin:20px auto 0;max-width:340px;display:flex;align-items:center;gap:10px;
+  border:1px solid rgba(15,122,107,.3);border-radius:999px;padding:9px 16px;
+  background:rgba(15,122,107,.06);
+}
+.autoplay-bar .ab-txt{font-family:var(--serif);font-size:12px;color:var(--qi);letter-spacing:.08em;flex:1;text-align:left;}
+.autoplay-bar .ab-lab{font-size:9.5px;color:var(--muted);letter-spacing:.1em;}
+
+/* ---------- 通用区块 ---------- */
+.sec{margin-top:42px;}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px;}
+.sec-head h2{
+  font-family:var(--serif);font-size:20px;font-weight:600;margin:0;letter-spacing:.16em;
+  display:flex;align-items:center;gap:9px;
+}
+.sec-head h2::before{content:"";width:3px;height:16px;background:linear-gradient(180deg,var(--qi),transparent);border-radius:2px;}
+.sec-head small{font-size:10px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;}
+.sec-sub{font-size:12.5px;color:var(--muted);margin:-8px 0 16px;letter-spacing:.06em;}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.94),rgba(255,255,255,.66));
+  border:1px solid var(--line);border-radius:18px;padding:18px;
+  box-shadow:0 8px 24px rgba(70,62,45,.07);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+
+.chip{
+  font-size:11px;color:var(--qi);border:1px solid rgba(15,122,107,.3);
+  background:rgba(15,122,107,.07);border-radius:999px;padding:4px 11px;letter-spacing:.06em;
+}
+
+/* ---------- 曲目 ---------- */
+.track{
+  display:flex;align-items:center;gap:13px;padding:13px 14px;border-radius:14px;
+  border:1px solid rgba(36,43,51,.1);background:rgba(255,255,255,.68);
+  box-shadow:0 2px 10px rgba(70,62,45,.05);
+  margin-bottom:10px;transition:.25s;position:relative;overflow:hidden;
+}
+.track.live{cursor:pointer;}
+.track.live:active{transform:scale(.985);}
+.track.playing{border-color:rgba(15,122,107,.55);background:rgba(15,122,107,.08);}
+.track.soon,.track.tbd{opacity:.62;}
+/* ---------- 曲目封面 ---------- */
+.tcover{
+  flex:none;width:52px;height:52px;border-radius:12px;overflow:hidden;position:relative;
+  border:1px solid rgba(36,43,51,.12);background:rgba(255,255,255,.6);
+  display:flex;align-items:center;justify-content:center;
+}
+.tcover img{width:100%;height:100%;object-fit:cover;display:block;}
+.tcover .phg{font-family:var(--serif);font-size:18px;line-height:1;color:var(--qi);opacity:.55;}
+.tcover.p-live{background:linear-gradient(150deg,rgba(15,122,107,.13),rgba(255,255,255,.5));}
+.tcover.p-soon{background:linear-gradient(150deg,rgba(156,111,39,.13),rgba(255,255,255,.5));border-color:rgba(156,111,39,.3);}
+.tcover.p-tbd{border-style:dashed;border-color:rgba(36,43,51,.2);}
+.track.playing .tcover{
+  border-color:rgba(156,111,39,.75);
+  box-shadow:0 0 0 1px rgba(156,111,39,.22), 0 0 14px rgba(15,122,107,.16);
+}
+.tidx{
+  font-family:var(--serif);font-size:12px;color:var(--muted);width:38px;text-align:center;flex:none;
+  letter-spacing:.04em;
+}
+.tidx b{display:block;font-size:17px;color:#1B2229;font-weight:600;}
+.tinfo{flex:1;min-width:0;}
+.tname{font-family:var(--serif);font-size:15.5px;letter-spacing:.06em;color:#1B2229;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tsub{font-size:11px;color:var(--muted);letter-spacing:.05em;margin-top:2px;}
+.tverse{font-family:var(--serif);font-size:11.5px;color:rgba(140,101,36,.92);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tdur{font-size:11px;color:var(--muted);flex:none;letter-spacing:.05em;}
+.tbtn{
+  width:34px;height:34px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(15,122,107,.45);color:var(--qi);background:rgba(15,122,107,.08);font-size:12px;
+}
+.tbtn.lock{border-color:rgba(36,43,51,.16);color:var(--muted);background:transparent;}
+.tflag{
+  position:absolute;top:0;right:0;font-size:10px;letter-spacing:.08em;padding:3px 9px;
+  border-bottom-left-radius:10px;color:#FFF8EC;background:var(--gold);font-weight:600;
+}
+.tflag.soon{background:rgba(15,122,107,.82);color:#F3F8F7;}
+.tflag.tbd{background:rgba(36,43,51,.08);color:var(--muted);}
+.wave{display:flex;align-items:flex-end;gap:2px;height:16px;}
+.wave i{width:2px;background:var(--qi);border-radius:2px;height:4px;display:block;animation:wv .9s ease-in-out infinite;}
+.wave i:nth-child(2){animation-delay:.15s}.wave i:nth-child(3){animation-delay:.3s}
+.wave i:nth-child(4){animation-delay:.45s}.wave i:nth-child(5){animation-delay:.6s}
+@keyframes wv{0%,100%{height:4px}50%{height:15px}}
+
+/* ---------- 我的修行 ---------- */
+.cult{text-align:center;position:relative;overflow:hidden;}
+.cult-lv{
+  font-family:var(--serif);font-size:13px;color:var(--gold);letter-spacing:.2em;margin-bottom:6px;
+}
+.cult-lv b{font-size:30px;color:#1B2229;display:block;letter-spacing:.06em;margin:2px 0 4px;}
+.cult-name{font-family:var(--serif);font-size:17px;color:var(--qi);letter-spacing:.14em;margin-bottom:4px;}
+.cult-verse{font-family:var(--serif);font-size:12.5px;color:var(--muted);letter-spacing:.05em;margin-bottom:16px;}
+.bar-wrap{padding:0 2px;margin:16px 0 8px;}
+.bar{height:3px;border-radius:3px;background:rgba(36,43,51,.11);position:relative;}
+.bar-fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--qi2),var(--qi),var(--gold));transition:width .8s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 10px rgba(15,122,107,.35);}
+.nodes{display:flex;justify-content:space-between;margin-top:9px;}
+.node{font-size:9.5px;color:var(--muted);letter-spacing:.03em;transition:.4s;}
+.node.on{color:var(--gold);text-shadow:0 0 8px rgba(156,111,39,.35);}
+.cult-data{display:flex;margin:18px 0 16px;}
+.cult-data div{flex:1;}
+.cult-data b{display:block;font-family:var(--serif);font-size:20px;color:#1B2229;}
+.cult-data span{font-size:10.5px;color:var(--muted);letter-spacing:.08em;}
+.btn{
+  display:block;width:100%;padding:14px;border-radius:14px;font-size:15px;letter-spacing:.24em;
+  font-family:var(--serif);font-weight:600;transition:.25s;text-align:center;
+}
+.btn-main{
+  background:linear-gradient(135deg,#19907F,#0F7A6B 55%,#0A5F52);color:#F2FFFB;
+  box-shadow:0 8px 24px rgba(15,122,107,.26);
+}
+.btn-main:active{transform:translateY(1px);}
+.btn-done{background:rgba(36,43,51,.05);color:var(--muted);border:1px solid rgba(36,43,51,.1);box-shadow:none;}
+.btn-ghost{border:1px solid rgba(156,111,39,.45);color:var(--gold);background:rgba(156,111,39,.06);}
+.btn-gold{background:linear-gradient(135deg,#C89B4D,#A87C33);color:#FFF8EA;box-shadow:0 8px 24px rgba(168,124,51,.26);}
+.tip{font-size:11px;color:var(--muted);margin-top:10px;letter-spacing:.05em;}
+
+/* ---------- 勋章墙 ---------- */
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.medal{text-align:center;transition:.3s;}
+.medal:active{transform:scale(.94);}
+.mseal{
+  width:100%;aspect-ratio:1;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:24px;font-weight:600;position:relative;
+  border:1.5px solid rgba(36,43,51,.14);background:rgba(255,255,255,.6);color:#A49C8D;
+  transition:.4s;
+}
+.medal.on .mseal{
+  border-color:rgba(140,101,36,.55);color:#3A2A12;
+  background:linear-gradient(150deg,#F3DCAE,#D8B475 60%,#B98F4E);
+  box-shadow:0 0 16px rgba(156,111,39,.32),inset 0 0 12px rgba(255,255,255,.5);
+}
+.medal.on .mseal::after{
+  content:"";position:absolute;inset:-5px;border-radius:15px;border:1px solid rgba(156,111,39,.32);
+  animation:halo 3.2s ease-in-out infinite;
+}
+@keyframes halo{0%,100%{opacity:.25;transform:scale(.97)}50%{opacity:.7;transform:scale(1.03)}}
+.mname{font-family:var(--serif);font-size:11.5px;margin-top:7px;letter-spacing:.05em;color:var(--muted);}
+.medal.on .mname{color:var(--gold);}
+.mprog{font-size:9px;color:#8B8578;margin-top:1px;}
+.medal.on .mprog{color:rgba(156,111,39,.85);}
+
+/* ---------- 抽奖 ---------- */
+.qi-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:12.5px;}
+.qi-row b{font-family:var(--serif);font-size:16px;color:var(--qi);}
+.prizes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;}
+.pr{text-align:center;padding:10px 4px;border-radius:12px;border:1px solid rgba(36,43,51,.1);background:rgba(255,255,255,.62);transition:.2s;position:relative;}
+.pr .ic{font-size:21px;line-height:1.2;}
+.pr .pn{font-size:10px;color:#3D4653;margin-top:5px;line-height:1.35;letter-spacing:.02em;}
+.pr .pp{font-size:9.5px;color:var(--gold);margin-top:3px;}
+.pr.hot{border-color:rgba(15,122,107,.55);background:rgba(15,122,107,.1);transform:translateY(-3px);box-shadow:0 6px 16px rgba(15,122,107,.16);}
+
+/* ---------- 入定符 ---------- */
+.tal-preview{
+  border-radius:16px;overflow:hidden;border:1px solid rgba(156,111,39,.3);position:relative;
+  background:linear-gradient(180deg,#FFFCF4,#F5EFE2);
+}
+.tal-preview canvas,.tal-preview img{width:100%;display:block;}
+
+/* ---------- 弹窗 ---------- */
+.mask{position:fixed;inset:0;background:rgba(38,42,38,.42);z-index:50;display:flex;align-items:center;justify-content:center;padding:26px;opacity:0;pointer-events:none;transition:.3s;backdrop-filter:blur(4px);}
+.mask.show{opacity:1;pointer-events:auto;}
+.modal{
+  width:100%;max-width:340px;background:linear-gradient(180deg,#FFFDF8,#F6F1E6);
+  border:1px solid rgba(156,111,39,.35);border-radius:20px;padding:24px 20px;text-align:center;
+  box-shadow:0 24px 60px rgba(40,36,28,.18);
+  transform:translateY(14px) scale(.96);transition:.3s;max-height:86vh;overflow:auto;
+}
+.mask.show .modal{transform:none;}
+.modal h3{font-family:var(--serif);font-size:18px;margin:0 0 6px;letter-spacing:.14em;color:var(--gold);}
+.modal p{font-size:13px;color:#4C5560;margin:0 0 16px;line-height:1.9;}
+.modal .micon{font-size:44px;margin-bottom:10px;}
+.modal .btn{margin-top:6px;}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:70px;transform:translateX(-50%) translateY(12px);
+  background:rgba(30,36,42,.94);border:1px solid rgba(15,122,107,.32);color:#F1F5F8;
+  font-size:13px;padding:11px 20px;border-radius:999px;z-index:80;opacity:0;transition:.3s;pointer-events:none;
+  letter-spacing:.05em;max-width:80%;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ---------- 页脚 ---------- */
+.foot{margin-top:46px;text-align:center;font-size:11px;color:#7C7669;line-height:2;letter-spacing:.08em;}
+.foot .fl{font-family:var(--serif);color:var(--gold);opacity:.75;font-size:12px;letter-spacing:.14em;}
+.reset{margin-top:14px;font-size:10px;color:#A19A8C;text-decoration:underline;display:inline-block;}
+
+/* ---------- 入场动画 ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);}
+.rv.in{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+
+<div class="app">
+
+  <!-- Hero -->
+  <header class="hero rv">
+    <div class="bagua">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="94" fill="none" stroke="#0F7A6B" stroke-width="1"/>
+        <circle cx="100" cy="100" r="74" fill="none" stroke="#9C6F27" stroke-width=".6"/>
+        <circle cx="100" cy="100" r="42" fill="none" stroke="#0F7A6B" stroke-width=".8"/>
+        <path d="M100 58 A42 42 0 0 1 100 142 A21 21 0 0 1 100 100 A21 21 0 0 0 100 58 Z" fill="#0F7A6B" opacity=".3"/>
+        <circle cx="100" cy="79" r="4.5" fill="#F7F3EA"/><circle cx="100" cy="121" r="4.5" fill="#9C6F27"/>
+        <g stroke="#9C6F27" stroke-width="1.4" opacity=".75">
+          <path d="M100 26 v18"/><path d="M100 156 v18"/><path d="M26 100 h18"/><path d="M156 100 h18"/>
+          <path d="M52 52 l13 13"/><path d="M135 135 l13 13"/><path d="M148 52 l-13 13"/><path d="M65 135 l-13 13"/>
+        </g>
+      </svg>
+    </div>
+    <div class="brandline">阅文动漫 · 腾讯动漫 <span>×</span> 酷狗文化</div>
+    <div class="album-tag"><i class="dot"></i> 一人之下 官方授权疗愈音乐企划</div>
+    <h1 class="bigtitle">一炁入梦</h1>
+    <div class="hero-rule"><i></i><b>凝神 · 聚炁 · 入定 · 归梦</b><i></i></div>
+    <p class="hero-desc">
+      异人修行，以<em>炁</em>入梦。
+    </p>
+    <p class="hero-ask">今夜，你入第几重？</p>
+
+    <div class="ipmark">炁体源流 · 一人之下 世界观音乐企划</div>
+
+    <div class="autoplay-bar" id="autoBar">
+      <span class="wave"><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="ab-txt" id="abTxt">正在入境 · 无涯·入境</span>
+      <span class="ab-lab">自动播放</span>
+    </div>
+
+    <p class="people"><b id="peopleNum">128,463</b> 位异人已入梦</p>
+  </header>
+
+  <!-- 疗愈曲目 -->
+  <section class="sec rv">
+    <div class="sec-head"><h2>疗愈曲目</h2><small>Tracks</small></div>
+    <p class="sec-sub">首曲已自动入境 · 每收听一首，入一重境界</p>
+    <div id="trackList"></div>
+  </section>
+
+  <!-- 我的修行 -->
+  <section class="sec rv">
+    <div class="sec-head"><h2>我的修行</h2><small>Cultivate</small></div>
+    <div class="card cult">
+      <div class="cult-lv">✦ 当前境界 <b id="lvNum">第1重</b></div>
+      <div class="cult-name" id="lvName">未入梦</div>
+      <div class="cult-verse" id="lvVerse">一念未起，万象皆寂。</div>
+
+      <div class="bar-wrap">
+        <div class="bar"><div class="bar-fill" id="barFill" style="width:0%"></div></div>
+        <div class="nodes" id="nodes"></div>
+      </div>
+
+      <div class="cult-data">
+        <div><b id="dDays">0</b><span>入定天数</span></div>
+        <div><b id="dTracks">0</b><span>收听曲目</span></div>
+        <div><b id="dQi">0</b><span>炁灵</span></div>
+        <div><b id="dMedal">0</b><span>炁印</span></div>
+      </div>
+
+      <button class="btn btn-main" id="btnCheck">今 日 入 定</button>
+      <p class="tip">每日入定，炁聚成梦 · 连续入定可获额外炁灵</p>
+    </div>
+  </section>
+
+  <!-- 勋章墙 -->
+  <section class="sec rv">
+    <div class="sec-head"><h2>炁印勋章</h2><small>Medals</small></div>
+    <p class="sec-sub">收听、打卡、分享均可结印 · 集印可兑换抽奖次数</p>
+    <div class="medals" id="medalWall"></div>
+  </section>
+
+  <!-- 抽奖 -->
+  <section class="sec rv">
+    <div class="sec-head"><h2>炁灵抽奖</h2><small>Lottery</small></div>
+    <div class="card">
+      <div class="qi-row">
+        <span>你拥有 <b id="qiNum">0</b> 个炁灵</span>
+        <span style="color:var(--muted)">每 10 个可抽一次</span>
+      </div>
+      <div class="prizes" id="prizeRow"></div>
+      <button class="btn btn-gold" id="btnLottery">炁灵不足，继续修行</button>
+    </div>
+  </section>
+
+  <!-- 入定符 -->
+  <section class="sec rv">
+    <div class="sec-head"><h2>生成入定符</h2><small>Talisman</small></div>
+    <p class="sec-sub">分享你的修行境界 · 邀好友同入清宁好梦</p>
+    <div class="tal-preview" id="talPreview"></div>
+    <button class="btn btn-ghost" id="btnTal" style="margin-top:14px">生 成 海 报 分 享</button>
+  </section>
+
+  <footer class="foot rv">
+    <div class="fl">一人之下 官方授权 × 酷狗文化 发行</div>
+    阅文动漫 · 腾讯动漫 联合出品<br />
+    《一人之下》动画 IP 版权归原权利方所有<br />
+    本活动最终解释权归酷狗音乐所有
+    <br /><a class="reset" id="btnReset">重置修行进度（演示用）</a>
+  </footer>
+
+</div>
+
+<div class="mask" id="mask"><div class="modal" id="modal"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+var TRACKS = [
+  {n:'无涯·入境',      s:'冥想 · 助眠音乐', v:'炁起无涯，神游太虚。', d:'08:32', st:'live', f:'首发', ip:'龙虎山 · 天师'},
+  {n:'心猿归正·定境',  s:'冥想 · 助眠音乐', v:'一念清净，万缘俱寂。', d:'07:48', st:'live', f:'首发', ip:'风后奇门 · 局中有局'},
+  {n:'再见陈朵·化境',  s:'冥想 · 助眠音乐', v:'尘缘化尽，好梦如初。', d:'09:16', st:'live', f:'首发', ip:'碧游村 · 一念化烬'},
+  {n:'听风吟·逸境',    s:'冥想 · 助眠音乐', v:'风过松间，心自悠然。', d:'06:54', st:'live', f:'首发', ip:'武当 · 月下听风'},
+  {n:'生长·萌境',      s:'冥想 · 助眠音乐', v:'春生一炁，万物潜长。', d:'--:--', st:'soon', f:'即将上线', ip:'修身炉 · 万物潜长'},
+  {n:'擒虎·静境',      s:'冥想 · 助眠音乐', v:'降伏其心，猛虎自驯。', d:'--:--', st:'soon', f:'即将上线', ip:'罗天大醮 · 擒虎于心'},
+  {n:'碧游村·幻境',    s:'冥想 · 助眠音乐', v:'云深不知处，碧游入梦来。', d:'--:--', st:'soon', f:'即将上线', ip:'曜星社 · 云深知处'},
+  {n:'探山·寻境',      s:'冥想 · 助眠音乐', v:'寻山不辞远，心静即归处。', d:'--:--', st:'soon', f:'即将上线', ip:'哪都通 · 寻山不辞远'},
+  {n:'待启 · 虚位',    s:'静候有缘人',   v:'——', d:'--:--', st:'tbd', f:'待启', ip:''},
+  {n:'待启 · 虚位',    s:'静候有缘人',   v:'——', d:'--:--', st:'tbd', f:'待启', ip:''},
+  {n:'待启 · 虚位',    s:'静候有缘人',   v:'——', d:'--:--', st:'tbd', f:'待启', ip:''}
+];
+
+/* ===== 歌曲封面 =====
+   把每张封面图的地址（http(s)://... 或相对路径）按顺序填进下面数组即可；
+   留空 '' 则显示占位符，不影响其它功能。建议 300×300 以上、JPG/WEBP、单张 ≤150KB。 */
+var COVERS = [
+  '', // 01 无涯·入境
+  '', // 02 心猿归正·定境
+  '', // 03 再见陈朵·化境
+  '', // 04 听风吟·逸境
+  '', // 05 生长·萌境
+  '', // 06 擒虎·静境
+  '', // 07 碧游村·幻境
+  '', // 08 探山·寻境
+  '', // 09 待启
+  '', // 10 待启
+  ''  // 11 待启
+];
+
+var MEDALS = [
+  {k:'m1', g:'炁', nm:'初炁印', ds:'首次试听道系疗愈之音', tip:'收听 1 首', ck:function(s){return s.listened.length>=1;}, pg:function(s){return Math.min(s.listened.length,1)+'/1';}},
+  {k:'m2', g:'入', nm:'入境印', ds:'完成首次入定打卡', tip:'入定 1 天', ck:function(s){return s.days>=1;}, pg:function(s){return Math.min(s.days,1)+'/1';}},
+  {k:'m3', g:'定', nm:'定心印', ds:'连续入定三日不断', tip:'连续 3 天', ck:function(s){return s.streak>=3;}, pg:function(s){return Math.min(s.streak,3)+'/3';}},
+  {k:'m4', g:'化', nm:'化境印', ds:'累计入定七日，炁自化境', tip:'入定 7 天', ck:function(s){return s.days>=7;}, pg:function(s){return Math.min(s.days,7)+'/7';}},
+  {k:'m5', g:'逸', nm:'逸风印', ds:'收听五首道音，风过心间', tip:'收听 5 首', ck:function(s){return s.listened.length>=5;}, pg:function(s){return Math.min(s.listened.length,5)+'/5';}},
+  {k:'m6', g:'探', nm:'探幽印', ds:'收听八首道音，探幽入微', tip:'收听 8 首', ck:function(s){return s.listened.length>=8;}, pg:function(s){return Math.min(s.listened.length,8)+'/8';}},
+  {k:'m7', g:'梦', nm:'梦呓印', ds:'生成并分享你的入定符', tip:'分享 1 次', ck:function(s){return s.shared>=1;}, pg:function(s){return Math.min(s.shared,1)+'/1';}},
+  {k:'m8', g:'一', nm:'一炁印', ds:'集齐全部已上线曲目，一炁化三清', tip:'收听全部上线曲目', ck:function(s){return s.listened.length>=LIVE_COUNT;}, pg:function(s){return Math.min(s.listened.length,LIVE_COUNT)+'/'+LIVE_COUNT;}}
+];
+
+var PRIZES = [
+  {ic:'🪭', nm:'一人之下\n限定手办', pp:'1%',  w:1},
+  {ic:'🎭', nm:'角色\n立牌套装', pp:'5%',  w:5},
+  {ic:'🎨', nm:'角色色纸\n/ 吧唧', pp:'15%', w:15},
+  {ic:'🎵', nm:'酷狗音乐\n月卡',   pp:'30%', w:30},
+  {ic:'🌙', nm:'谢谢参与\n再入一梦', pp:'49%', w:49}
+];
+
+var LIVE_COUNT = TRACKS.filter(function(t){return t.st==='live';}).length;
+var KEY = 'yiqi_dream_v1';
+
+/* ================= 状态 ================= */
+var DEF = {days:0, streak:0, qi:0, listened:[], shared:0, last:'', playing:-1};
+var S = load();
+
+function load(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(!raw) return JSON.parse(JSON.stringify(DEF));
+    var o = JSON.parse(raw);
+    for(var k in DEF){ if(!(k in o)) o[k]=DEF[k]; }
+    return o;
+  }catch(e){ return JSON.parse(JSON.stringify(DEF)); }
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function today(){
+  var d=new Date();
+  return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+function level(){ return Math.max(1, Math.min(TRACKS.length, S.listened.length)); }
+function curTrack(){ return TRACKS[level()-1]; }
+
+/* ================= 渲染 ================= */
+function $(id){ return document.getElementById(id); }
+
+function renderTracks(){
+  var box = $('trackList'); box.innerHTML='';
+  TRACKS.forEach(function(t,i){
+    var el = document.createElement('div');
+    var isLive = t.st==='live';
+    var playing = S.playing===i;
+    el.className = 'track '+t.st+(playing?' playing':'');
+    var cov = (COVERS[i]||'').trim();
+    var covEl = cov
+      ? '<div class="tcover"><img src="'+cov+'" alt="'+t.n+' 封面" loading="lazy" /></div>'
+      : '<div class="tcover p-'+t.st+'"><span class="phg">'+(t.st==='tbd'?'—':(t.st==='soon'?'待':'炁'))+'</span></div>';
+    el.innerHTML =
+      covEl+
+      '<div class="tidx"><b>'+(i+1)+'</b>重</div>'+
+      '<div class="tinfo">'+
+        '<div class="tname">'+t.n+'</div>'+
+        '<div class="tsub">'+t.s+'</div>'+
+        '<div class="tverse">'+(t.v==='——'?'':t.v)+'</div>'+
+        (t.ip?'<div class="tscene">'+t.ip+'</div>':'')+
+      '</div>'+
+      '<div class="tdur">'+(playing?'<span class="wave"><i></i><i></i><i></i><i></i><i></i></span>':t.d)+'</div>'+
+      '<div class="tbtn'+(isLive?'':' lock')+'">'+(isLive?(playing?'❚❚':'▶'):'🔒')+'</div>'+
+      '<div class="tflag '+t.st+'">'+t.f+'</div>';
+    if(isLive){
+      el.onclick = function(){ togglePlay(i); };
+    }else{
+      el.onclick = function(){ toast(t.st==='soon'?'《'+t.n.split('·')[0]+'》即将上线，敬请期待':'席位待启，静候有缘人'); };
+    }
+    box.appendChild(el);
+  });
+}
+
+function renderCult(){
+  var lv = level(), t = curTrack();
+  $('lvNum').textContent = '第'+lv+'重';
+  $('lvName').textContent = (S.listened.length===0? '未入梦' : t.n);
+  $('lvVerse').textContent = (S.listened.length===0? '一念未起，万象皆寂。' : t.v);
+  $('barFill').style.width = ((lv-1)/(TRACKS.length-1)*100)+'%';
+  $('dDays').textContent = S.days;
+  $('dTracks').textContent = S.listened.length;
+  $('dQi').textContent = S.qi;
+  $('dMedal').textContent = MEDALS.filter(function(m){return m.ck(S);}).length;
+
+  var nb = $('nodes'); nb.innerHTML='';
+  [1,3,5,7,9,11].forEach(function(n){
+    var d = document.createElement('div');
+    d.className = 'node'+(lv>=n?' on':'');
+    d.textContent = '第'+n+'重';
+    nb.appendChild(d);
+  });
+
+  var btn = $('btnCheck');
+  if(S.last===today()){
+    btn.className='btn btn-done';
+    btn.textContent='今 日 已 入 定 · 明 日 再 来';
+    btn.onclick=function(){ toast('今日炁已归元，明日再来修行'); };
+  }else{
+    btn.className='btn btn-main';
+    btn.textContent='今 日 入 定';
+    btn.onclick=doCheck;
+  }
+}
+
+function renderMedals(){
+  var box=$('medalWall'); box.innerHTML='';
+  MEDALS.forEach(function(m){
+    var on = m.ck(S);
+    var el=document.createElement('div');
+    el.className='medal'+(on?' on':'');
+    el.innerHTML='<div class="mseal">'+m.g+'</div><div class="mname">'+m.nm+'</div><div class="mprog">'+(on?'已结印':m.pg(S))+'</div>';
+    el.onclick=function(){
+      openModal('<div class="micon">'+(on?'🏅':'🔒')+'</div><h3>'+m.nm+'</h3><p>'+m.ds+'<br><span style="color:#6E6A5F">进度：'+m.pg(S)+' · '+m.tip+'</span></p><button class="btn btn-ghost" onclick="closeModal()">'+(on?'已 结 印':'继 续 修 行')+'</button>');
+    };
+    box.appendChild(el);
+  });
+}
+
+function renderPrizes(){
+  var box=$('prizeRow'); box.innerHTML='';
+  PRIZES.forEach(function(p,i){
+    var el=document.createElement('div');
+    el.className='pr'; el.id='pr'+i;
+    el.innerHTML='<div class="ic">'+p.ic+'</div><div class="pn">'+p.nm.replace('\n','<br>')+'</div><div class="pp">'+p.pp+'</div>';
+    box.appendChild(el);
+  });
+  var btn=$('btnLottery');
+  $('qiNum').textContent=S.qi;
+  if(S.qi>=10){ btn.textContent='凝 炁 抽 奖 · 消 耗 10'; btn.className='btn btn-gold'; }
+  else{ btn.textContent='炁灵不足，继续修行'; btn.className='btn btn-done'; }
+}
+
+function renderAll(){ renderCult(); renderMedals(); renderPrizes(); renderTracks(); renderTal(); }
+
+/* ================= 交互 ================= */
+function toast(msg){
+  var t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm=setTimeout(function(){ t.classList.remove('show'); },2000);
+}
+function openModal(html){ $('modal').innerHTML=html; $('mask').classList.add('show'); }
+function closeModal(){ $('mask').classList.remove('show'); }
+$('mask').onclick=function(e){ if(e.target===$('mask')) closeModal(); };
+
+function unlockCheck(){
+  var before = S._m || [];
+  var now = MEDALS.filter(function(m){return m.ck(S);}).map(function(m){return m.k;});
+  var fresh = now.filter(function(k){ return before.indexOf(k)<0; });
+  S._m = now;
+  return fresh;
+}
+
+function togglePlay(i){
+  if(S.playing===i){
+    S.playing=-1; save(); renderTracks(); updateAutoBar(); return;
+  }
+  S.playing=i;
+  var isNew = S.listened.indexOf(i)<0;
+  if(isNew){ S.listened.push(i); S.qi+=1; }
+  save();
+  renderAll();
+  updateAutoBar();
+  if(isNew){
+    toast('已入第'+level()+'重 · 炁灵 +1');
+    var fresh=unlockCheck();
+    if(fresh.length){ save(); renderMedals(); setTimeout(function(){ popMedal(fresh[0]); },500); }
+  }
+}
+
+function doCheck(){
+  var t=today();
+  var y=new Date(Date.now()-86400000);
+  var ys=y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();
+  S.days+=1;
+  S.streak = (S.last===ys)? S.streak+1 : 1;
+  S.qi += 2 + (S.streak>=3?1:0);
+  S.last=t;
+  save();
+  renderAll();
+  var msg='入定成功 · 炁灵 +'+(2+(S.streak>=3?1:0))+'，已连续 '+S.streak+' 天';
+  toast(msg);
+  var fresh=unlockCheck();
+  if(fresh.length){ save(); renderMedals(); setTimeout(function(){ popMedal(fresh[0]); },600); }
+}
+
+function popMedal(k){
+  var m=MEDALS.filter(function(x){return x.k===k;})[0];
+  if(!m) return;
+  openModal('<div class="micon">🏅</div><h3>结印成功</h3><p>恭喜结得 <b style="color:#9C6F27">'+m.nm+'</b><br><span style="color:#6E6A5F">'+m.ds+'</span></p><button class="btn btn-gold" onclick="closeModal()">收 下 此 印</button>');
+}
+
+$('btnLottery').onclick=function(){
+  if(S.qi<10){ toast('炁灵不足，先去听歌入定'); return; }
+  S.qi-=10; save(); renderPrizes();
+  var btn=$('btnLottery'); btn.textContent='凝 炁 中 …'; btn.className='btn btn-done';
+  var idx=0, rounds=0, total=26;
+  var timer=setInterval(function(){
+    document.querySelectorAll('.pr').forEach(function(e){ e.classList.remove('hot'); });
+    idx=(idx+1)%PRIZES.length;
+    document.getElementById('pr'+idx).classList.add('hot');
+    rounds++;
+    if(rounds>=total){
+      clearInterval(timer);
+      var pick=weightedPick();
+      document.querySelectorAll('.pr').forEach(function(e){ e.classList.remove('hot'); });
+      document.getElementById('pr'+pick).classList.add('hot');
+      var p=PRIZES[pick];
+      var win = pick!==PRIZES.length-1;
+      openModal('<div class="micon">'+p.ic+'</div><h3>'+(win?'恭 喜 中 奖':'再 入 一 梦')+'</h3><p>'+(win?'你抽中了 <b style="color:#9C6F27">'+p.nm.replace('\n','')+'</b><br><span style="color:#6E6A5F">奖品将于 7 个工作日内发放</span>':'未中奖，炁灵已归元<br><span style="color:#6E6A5F">继续修行，好梦终会来</span>')+'</p><button class="btn btn-ghost" onclick="closeModal()">知 道 了</button>');
+      renderAll();
+    }
+  },70);
+};
+
+function weightedPick(){
+  var total=PRIZES.reduce(function(a,b){return a+b.w;},0);
+  var r=Math.random()*total, acc=0;
+  for(var i=0;i<PRIZES.length;i++){ acc+=PRIZES[i].w; if(r<acc) return i; }
+  return PRIZES.length-1;
+}
+
+/* ================= 入定符海报 ================= */
+function drawTal(){
+  var W=640,H=1000;
+  var c=document.createElement('canvas'); c.width=W; c.height=H;
+  var x=c.getContext('2d');
+  var g=x.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#FBF6EC'); g.addColorStop(.5,'#F6F0E2'); g.addColorStop(1,'#F1E9D8');
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+
+  // 星点
+  for(var i=0;i<70;i++){
+    var sx=Math.random()*W, sy=Math.random()*H, sr=Math.random()*1.6+.3;
+    x.fillStyle='rgba(90,105,95,'+(Math.random()*.13+.04)+')';
+    x.beginPath(); x.arc(sx,sy,sr,0,6.283); x.fill();
+  }
+  // 光晕
+  var rg=x.createRadialGradient(W/2,300,20,W/2,300,340);
+  rg.addColorStop(0,'rgba(15,122,107,.10)'); rg.addColorStop(1,'rgba(15,122,107,0)');
+  x.fillStyle=rg; x.fillRect(0,0,W,700);
+
+  // 外框
+  x.strokeStyle='rgba(156,111,39,.6)'; x.lineWidth=2;
+  x.strokeRect(26,26,W-52,H-52);
+  x.strokeStyle='rgba(156,111,39,.3)'; x.lineWidth=1;
+  x.strokeRect(38,38,W-76,H-76);
+
+  // 顶部
+  x.textAlign='center';
+  x.fillStyle='rgba(140,101,36,.9)';
+  x.font='500 16px "Songti SC",serif';
+  x.fillText('一人之下 官方授权 × 酷狗文化 发行',W/2,84);
+
+  // 主标
+  x.fillStyle='#1E252B';
+  x.font='600 62px "Songti SC",serif';
+  x.fillText('一 炁 入 梦',W/2,180);
+
+  x.fillStyle='rgba(15,122,107,.75)';
+  x.font='400 15px "Songti SC",serif';
+  x.fillText('凝 神 · 聚 炁 · 入 定 · 归 梦',W/2,214);
+
+  // 分隔
+  x.strokeStyle='rgba(156,111,39,.4)';
+  x.beginPath(); x.moveTo(120,248); x.lineTo(W-120,248); x.stroke();
+  x.fillStyle='rgba(156,111,39,.55)';
+  x.beginPath(); x.arc(W/2,248,4,0,6.283); x.fill();
+
+  // 境界
+  var lv=level(), t=curTrack();
+  x.fillStyle='#1B2229';
+  x.font='600 82px "Songti SC",serif';
+  x.fillText('第'+lv+'重',W/2,380);
+
+  x.fillStyle='#0F7A6B';
+  x.font='500 34px "Songti SC",serif';
+  x.fillText(S.listened.length===0?'未入梦':t.n,W/2,436);
+
+  x.fillStyle='rgba(72,80,88,.85)';
+  x.font='400 22px "Songti SC",serif';
+  x.fillText('「'+(S.listened.length===0?'一念未起，万象皆寂。':t.v)+'」',W/2,486);
+
+  // 数据
+  x.strokeStyle='rgba(36,43,51,.13)';
+  x.beginPath(); x.moveTo(90,540); x.lineTo(W-90,540); x.stroke();
+
+  var data=[['入定天数',S.days+' 天'],['收听曲目',S.listened.length+' 首'],['炁印',MEDALS.filter(function(m){return m.ck(S);}).length+' 枚']];
+  data.forEach(function(d,i){
+    var cx=W/2+(i-1)*180;
+    x.fillStyle='#1B2229'; x.font='600 34px "Songti SC",serif';
+    x.fillText(d[1],cx,610);
+    x.fillStyle='rgba(110,106,95,.95)'; x.font='400 15px "PingFang SC",sans-serif';
+    x.fillText(d[0],cx,640);
+  });
+
+  x.strokeStyle='rgba(36,43,51,.13)';
+  x.beginPath(); x.moveTo(90,672); x.lineTo(W-90,672); x.stroke();
+
+  // 云纹
+  x.strokeStyle='rgba(15,122,107,.32)'; x.lineWidth=1.5;
+  for(var k=0;k<3;k++){
+    var yy=730+k*22, ww=110-k*20;
+    x.beginPath();
+    x.moveTo(W/2-ww,yy);
+    x.quadraticCurveTo(W/2-ww/2,yy-16,W/2,yy);
+    x.quadraticCurveTo(W/2+ww/2,yy+16,W/2+ww,yy);
+    x.stroke();
+  }
+
+  // 日期
+  var d=new Date();
+  var ds=d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
+  x.fillStyle='rgba(110,106,95,.9)';
+  x.font='400 16px "PingFang SC",sans-serif';
+  x.fillText(ds+' · 我的入定符',W/2,830);
+
+  x.fillStyle='rgba(15,122,107,.8)';
+  x.font='400 17px "Songti SC",serif';
+  x.fillText('长按保存 · 分享你的清宁好梦',W/2,880);
+
+  // 印章
+  x.fillStyle='#B03A2C';
+  x.fillRect(W-118,H-150,74,74);
+  x.fillStyle='#FBF6EC';
+  x.font='600 30px "Songti SC",serif';
+  x.fillText('入梦',W-81,H-104);
+
+  // 左下角
+  x.textAlign='left';
+  x.fillStyle='rgba(110,106,95,.85)';
+  x.font='400 14px "PingFang SC",sans-serif';
+  x.fillText('阅文动漫 · 腾讯动漫',52,H-112);
+  x.fillText('联合出品',52,H-92);
+
+  return c;
+}
+
+function renderTal(){
+  var box=$('talPreview'); box.innerHTML='';
+  box.appendChild(drawTal());
+}
+
+$('btnTal').onclick=function(){
+  var c=drawTal();
+  var url=c.toDataURL('image/png');
+  S.shared+=1; save();
+  var fresh=unlockCheck();
+  renderCult(); renderMedals();
+  openModal(
+    '<h3>入定符已成</h3>'+
+    '<div style="border-radius:12px;overflow:hidden;border:1px solid rgba(156,111,39,.35);margin-bottom:14px"><img src="'+url+'" style="width:100%;display:block"></div>'+
+    '<p style="margin-bottom:12px">长按图片保存，分享你的修行境界</p>'+
+    '<a class="btn btn-gold" style="display:block;text-decoration:none;line-height:1.4;padding:14px" href="'+url+'" download="一炁入梦-入定符.png">保 存 海 报</a>'+
+    '<button class="btn btn-ghost" style="margin-top:10px" onclick="closeModal()">返 回</button>'
+  );
+  if(fresh.length){ setTimeout(function(){ popMedal(fresh[0]); },1200); }
+};
+
+$('btnReset').onclick=function(){
+  S=JSON.parse(JSON.stringify(DEF)); S._m=[]; save(); renderAll(); toast('修行进度已重置');
+};
+
+/* ================= 星点背景 ================= */
+(function(){
+  var c=document.getElementById('stars'), x=c.getContext('2d');
+  var stars=[], W, H;
+  function resize(){
+    W=c.width=window.innerWidth*2; H=c.height=window.innerHeight*2;
+    c.style.width=window.innerWidth+'px'; c.style.height=window.innerHeight+'px';
+    stars=[];
+    for(var i=0;i<60;i++){
+      stars.push({x:Math.random()*W, y:Math.random()*H, r:(Math.random()*1.8+.4)*2, a:Math.random()*.6+.15, sp:Math.random()*.16+.04, ph:Math.random()*6.28});
+    }
+  }
+  function tick(t){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      s.y-=s.sp*2; if(s.y<-10){ s.y=H+10; s.x=Math.random()*W; }
+      var tw=.55+.45*Math.sin(t/900+s.ph);
+      x.fillStyle='rgba(15,122,107,'+(s.a*tw*.55)+')';
+      x.beginPath(); x.arc(s.x,s.y,s.r,0,6.283); x.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+  resize(); window.addEventListener('resize',resize); requestAnimationFrame(tick);
+})();
+
+/* ================= 入场动画 ================= */
+(function(){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el,i){ io.observe(el); });
+  setTimeout(function(){ document.querySelectorAll('.rv').forEach(function(el){ el.classList.add('in'); }); },1200);
+})();
+
+/* ================= 初始化 ================= */
+S._m = MEDALS.filter(function(m){return m.ck(S);}).map(function(m){return m.k;});
+// 参与人数随本地进度微调
+$('peopleNum').textContent = (128463 + S.days).toLocaleString('en-US');
+renderAll();
+
+/* ---------- 顶部入境状态条 ---------- */
+function updateAutoBar(){
+  var txt=$('abTxt'); if(!txt) return;
+  txt.textContent = (S.playing>=0) ? ('正在入境 · '+TRACKS[S.playing].n) : '点击曲目 · 开始入境';
+}
+
+/* ---------- 自动入境：播放首曲 + 解锁第一重 ---------- */
+function autoEnter(){
+  var i=0;
+  while(i<TRACKS.length && TRACKS[i].st!=='live') i++;
+  if(i>=TRACKS.length) return;
+
+  S.playing = i;
+  var isNew = S.listened.indexOf(i)<0;
+  if(isNew){ S.listened.push(i); S.qi+=1; }
+  save();
+  renderAll();
+  updateAutoBar();
+
+  setTimeout(function(){
+    toast(isNew ? ('已自动入境 · 第'+level()+'重 · 炁灵 +1') : ('已续播 · 第'+level()+'重'));
+  }, 900);
+
+  var fresh=unlockCheck();
+  if(fresh.length){
+    save(); renderMedals();
+    setTimeout(function(){ popMedal(fresh[0]); }, 1900);
+  }
+}
+setTimeout(autoEnter, 700);
+</script>
+</body>
+</html>
